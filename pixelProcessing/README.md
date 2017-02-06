@@ -23,11 +23,10 @@ Rotating values around a given postion in the screen
 
 Transitions between modes
 
-** Hit Escape to quit **
 
 -----------------
 
-Command to run- 
+Command to run- ** Hit Escape to quit **
 
 python visualizer.py (verbosePrint) (Visual#; 0-6) (Resolution#) (ScreenShots/Windowed mode)
 
