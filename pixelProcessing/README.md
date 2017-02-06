@@ -17,7 +17,7 @@ Transitions between modes
 
 -----------------
 
-Command to run-
+Command to run- 
 
 python visualizer.py (verbosePrint) (Visual#; 0-6) (Resolution#) (ScreenShots/Windowed mode)
 
