@@ -2,6 +2,9 @@ Comments to come, my apologies
 
 This is a dump for a pixel processing test using pygame.
 
+** Pygame is very slow for full screen pixel processing, this was made with the intention of running on a RaspberryPi, but it seems OpenGL is the better option in this situation**
+
+
 Here is the kind of effects you'll see with this script-
 
 https://www.youtube.com/watch?v=NvqFOaD-OWo
