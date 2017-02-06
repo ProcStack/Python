@@ -73,7 +73,7 @@ import math
 import random
 import numpy as np
 from Xlib import X, display
-execfile("particles.py")
+#execfile("particles.py")
 
 threadCount=1
 verbose=0
