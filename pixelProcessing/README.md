@@ -2,6 +2,13 @@ Comments to come, my apologies
 
 This is a dump for a pixel processing test using pygame.
 
+Here is the kind of effects you'll see with this script-
+
+https://www.youtube.com/watch?v=NvqFOaD-OWo
+
+https://www.youtube.com/watch?v=-U6eKRmdEyo
+
+-----------------
 
 What you'll find in this python script-
 
