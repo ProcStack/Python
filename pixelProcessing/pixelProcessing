@@ -15,11 +15,9 @@ RGB to HSV;  HSV to RGB (I'm still working out a bug when Hue rolls over past 1.
 Rotating values around a given postion in the screen
 Transitions between modes
 
-** Hit Escape to quit **
-
 -----------------
 
-Command to run-
+Command to run- ** Hit Escape to quit **
 python visualizer.py (verbosePrint) (Visual#; 0-6) (Resolution#) (ScreenShots/Windowed mode)
 
 Resolution of 20-
