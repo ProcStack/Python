@@ -21,19 +21,19 @@ Command to run-
 
 python visualizer.py (verbosePrint) (Visual#; 0-6) (Resolution#) (ScreenShots/Windowed mode)
 
-Resolution of 20-
+Resolution of 20--
 
 python visualizer.py 20
 
-Mode 4; resoltion of 10
+Mode 4; resoltion of 10--
 
 python visualizer.py 4 10
 
-Verbose printing on screen, resolution 10
+Verbose printing on screen, resolution 10--
 
 python visualizer.py v 10
 
-Windowed resolution of 20
+Windowed resolution of 20--
 
 python visualizer.py 20 w
 
