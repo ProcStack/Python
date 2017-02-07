@@ -22,15 +22,11 @@ Slim image sequences down by copying every N frame to the same folder as the ima
 
 For movies, having a lot of frames is great for smooth video
 
-But when it comes to generating gifs, without using a color pallette map
-
-Every frame counts in its file size
+But when it comes to generating gifs, without using a color pallette map, every frame counts in its file size
 
 Ending up with a 20 meg gif to display on the web is never fun for cell phone users not on wifi
 
 
-Supports any sequence with a number in a shared position.
-
-*name.#.ext / name_#.ext / name#.ext*
+Supports any sequence with a number in a shared position - *name.#.ext / name_#.ext / name#.ext*
 
 Command - **python *Path*/slimSeq.py [-v -s #] sequenceName.#.ext**
