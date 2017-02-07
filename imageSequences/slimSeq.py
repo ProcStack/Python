@@ -20,6 +20,7 @@
 # The script checks if your image sequence starts at 0 or 1
 # Currently it renumbers the images based on their current number
 #
+# ** More comments to come shortly, its late tonight **
 
 import argparse
 import os
