@@ -7,6 +7,9 @@ Here is the kind of effects you'll see with this script-
 https://www.youtube.com/watch?v=NvqFOaD-OWo
 https://www.youtube.com/watch?v=-U6eKRmdEyo
 
+After installing required modules, running without any flags will run default values and random modes-
+python pixelProcessing.py
+
 -----------------
 
 What you'll find in this python script-
