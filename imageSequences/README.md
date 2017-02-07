@@ -17,7 +17,7 @@ Command - **python *Path*/cropSequence.py [0,0,500,250]**
 
 Script - **slimSeq.py**
 
-Slim image sequences down by copying every N frame to the same folder as the image sequence with 'slim' prepended.
+Slim image/file sequences down by copying every N frame to the same folder as the image sequence with 'slim' prepended.
 
 
 For movies, having a lot of frames is great for smooth video
