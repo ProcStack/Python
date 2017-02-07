@@ -1,6 +1,7 @@
 **These scripts are good for creating, editing, and converting image sequences**
 
 **They are mostly wrappers for linux commands, but with added logic**
+
 --------------------
 
 Script - **cropSequence.py**
