@@ -1,3 +1,6 @@
+**These files are written in Python2.7**
+--------------------
+
 Script - cropSequence.py
 
 Used to crop an image sequence within the folder the script is ran.
