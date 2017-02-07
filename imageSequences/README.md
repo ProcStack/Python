@@ -1,11 +1,11 @@
 **These files are written in Python2.7**
 --------------------
 
-Script - cropSequence.py
+Script - **cropSequence.py**
 
 Used to crop an image sequence within the folder the script is ran.
 
 Prepends a given variable, 'crop' by default
 
-Command - python *Path*/cropSequence.py [0,0,500,250]
+Command - **python *Path*/cropSequence.py [0,0,500,250]**
 
