@@ -41,3 +41,4 @@ var logInPrompt=[76,79,71,73,78]; // l, o, g, i, n
 var logInMatch=0;
 var storeKeyHold=0;
 var rightClick=1;
+var rightDown=0;

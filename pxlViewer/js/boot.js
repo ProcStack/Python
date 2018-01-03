@@ -1,9 +1,10 @@
 
 function init(){
-	document.onmousemove = getMouseXY;
+	document.onmousemove = function(e){getMouseXY;if(rightDown==1){ dragZoom();}};
 	document.onscroll=function(){return false;};
 	
-	document.onmousedown=function(e) {checkMouse(e)};
+	document.onmousedown=function(e) {console.log('etest');checkMouse;};
+	document.onmouseup=function(){rightDown=0;};
 	
 	resize(0);
 	
@@ -46,7 +47,6 @@ function checkMouse(e){
 	}
 	mButton=button;
 //$("#verbText").html(mButton+" - "+button +" -- ");
-
 	if(button == 1){
 		dragging=1;
 		startDrag(curThumb);
@@ -71,10 +71,11 @@ function checkMouse(e){
 	if(button == 3 && rightClick==1 ){
 		
 		if(doubleClick==1){
-			//resetZoomPan();
-			zoomLayers("touchData", "imgBlock",[],[],-1,0);
+			resetZoomPan();
+			rightDown=0;
 		}
 		if(doubleClick==0){
+			rightDown=1;
 			doubleClick=1;
 			countdown("doubleClick=0;",15);
 		}

@@ -19,28 +19,11 @@ function scrollGallery(delta, abs){
 	var yMove=(delta);
 	scroller+=delta;
 	scroller=Math.max(-1800,scroller);
-	//dragCount+=scroller/120;
 	dragCount+=scroller/120;
 	dragDist=scroller;
-	var zoomPerc=delta/15;
-	/*
-	// OLD ZOOM METHOD, DOESN'T WORK WELL
-	scalePerc=Math.min(5,Math.max(.01,(dragDist)));
-	calc[2]=Math.min(origImgW*10, Math.max(origImgW/4, (origImgW)+dragDist) );
-	calc[3]=Math.min(origImgH*10, Math.max(origImgH/4, (origImgH)+(dragDist*(origImgH/origImgW))) );
-	var pos=$("#imgBlock").position();
-	var negMult=1;
-	calc[0]=Math.min(origImgX, Math.max(((origImgW/3)+dragDist)*-1+galWidth, origImgX+(pos.left)-dragDist/2) )/2 + Math.max(0,((sW-galWidth)-calc[2])/2);
-	calc[1]=Math.min(origImgY, Math.max(((origImgH/6)+dragDist)*-1, origImgY+(pos.top)-(dragDist*(origImgH/origImgW))/2) )/4 + Math.max(0,(sH-calc[3])/2);
-	$("#imgBlock").css({"left":calc[0],"top":calc[1],"width":calc[2],"height":calc[3]});
-	origImgX=calc[0];
-	origImgY=calc[1];
-	*/
+	var zoomPerc=delta/10;
 	zoomLayers("touchData", "imgBlock",[],[],-2,zoomPerc);
 	updateCanvas();
-	//loadChecker();
-	//tester+=1;
-	//$("#touchData").html(tester);
 	return false;
 }
 
@@ -59,8 +42,11 @@ function startDrag() {
 	prevMouseY = mouseY;
 	origMouseX = mouseX;
 	origMouseY = mouseY;
-	$("#imgBlock").attr('offX', $("#imgBlock").css('left') );
-	$("#imgBlock").attr('offY', $("#imgBlock").css('top') );
+	$("#imgBlock").attr('offX', parseInt($("#imgBlock").css('left')) );
+	$("#imgBlock").attr('offY', parseInt($("#imgBlock").css('top')) );
+	$("#imgBlock").attr('curSizeW', parseInt($("#imgBlock").width()) );
+	$("#imgBlock").attr('curSizeH', parseInt($("#imgBlock").height()) );
+
 
 	//dragCount=0;
 	
@@ -73,30 +59,32 @@ function doDrag() {
 	//if(Number.isInteger(m)){
 	//	m=[mouseX,mouseY];
 	//}
-	
-	var imgW=$("#imgBlock").width();
-	var imgH=$("#imgBlock").height();
-	var imgX=parseInt($("#imgBlock").attr('offX'));
-	var imgY=parseInt($("#imgBlock").attr('offY'));
-	var xMove=(mouseX-origMouseX);
-	var yMove=(mouseY-origMouseY);
-		var dragDist=Math.sqrt(Math.pow(xMove,2)+Math.pow(yMove,2));
-		dragDist=mouseX-origMouseX;
-		calc[0]=(imgX)+xMove;
-		calc[1]=(imgY)+yMove;
-		$("#imgBlock").css({"left":calc[0],"top":calc[1]});
-
+	if(mButton == 2){
+		zoomLayers("touchData", "imgBlock",[],[],-2,-1);
+		updateCanvas();
+	}else{
+		var imgW=$("#imgBlock").width();
+		var imgH=$("#imgBlock").height();
+		var imgX=parseInt($("#imgBlock").attr('offX'));
+		var imgY=parseInt($("#imgBlock").attr('offY'));
+		var xMove=(mouseX-origMouseX);
+		var yMove=(mouseY-origMouseY);
+			var dragDist=Math.sqrt(Math.pow(xMove,2)+Math.pow(yMove,2));
+			dragDist=mouseX-origMouseX;
+			calc[0]=(imgX)+xMove;
+			calc[1]=(imgY)+yMove;
+			$("#imgBlock").css({"left":calc[0],"top":calc[1]});
+	}
 	/*if(dragging>0){ // Get onmousedrag function to work on entire page, not individual items for setTimeout
 		setTimeout(function(e){doDrag(m)},20);
 	}*/
 }
 // Thumbnail End Drag
 function endDrag() {
-	var pos=$("#imgBlock").position();
-	origImgX=pos.left;
-	origImgY=pos.top;
-	$("#imgBlock").attr('offX',origImgX);
-	$("#imgBlock").attr('offY',origImgY);
+	$("#imgBlock").attr('offX', parseInt($("#imgBlock").css('left')) );
+	$("#imgBlock").attr('offY', parseInt($("#imgBlock").css('top')) );
+	$("#imgBlock").attr('curSizeW', parseInt($("#imgBlock").width()) );
+	$("#imgBlock").attr('curSizeH', parseInt($("#imgBlock").height()) );
 	dragCount=0;
 }
 
@@ -138,7 +126,7 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 	}
 	var curScale=$("#"+id).attr('curScale');
 	if(init==-2){
-		mPos=[mouseX-galLeft,mouseY-galTop];
+		mPos=[mouseX,mouseY];
 		//mPos=[mouseX-imgLeft,mouseY-imgTop];
 		//mPos=[mouseX-imgLeft,mouseY-imgTop];
 		
@@ -185,13 +173,28 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 		//$("#"+asset).css({'top':'0px','left':'0px'});
 //////////////////////////////////////////////////////////////
 	}else{ // Zoom math
-		// Set zoom rate
-		var distScale=200;
-		if(mouseX<mPos[0]){
-			distScale=500;
+		if(mButton!= 2){
+			// Set zoom rate
+			var distScale=200;
+			if(mouseX<mPos[0]){
+				distScale=500;
+			}
+			mag=Math.max(.1,(distScale+mag)/distScale); // Zoom rate math
+		}else{
+			var dx=origMouseX-mouseX;
+			dx= dx=0?1:dx
+			var dy=origMouseY-mouseY;
+			dy= dy=0?1:dy
+			mag=Math.sqrt(dx*dx + dy*dy)*(Math.abs(dx)/dx);
+			mag=1-(mag/500);
+			mPos=[origMouseX,origMouseY];
+			cPos[0]=parseInt($("#imgBlock").attr('offX'));
+			cPos[1]=parseInt($("#imgBlock").attr('offY'));
+			cPos[2]=$("#imgBlock").attr('curSizeW');
+			cPos[3]=$("#imgBlock").attr('curSizeH');
+
+$("#verbText").html(origMouseX+" - "+origMouseY +" -- "+cPos[2]+" - "+cPos[3] );
 		}
-		mag=Math.max(.1,(distScale+mag)/distScale); // Zoom rate math
-		
 		var curPercX=(mPos[0]-cPos[0])/cPos[2];
 		var curPercY=(mPos[1]-cPos[1])/cPos[3];
 		
@@ -201,8 +204,8 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 		var offX=-origPosX*mag+mPos[0];//(curPercX*(cPos[2]*curScale)-cPos[0]*curScale)/(mag*curScale);
 		var offY=-origPosY*mag+mPos[1];//(curPercY*(cPos[3]*curScale)-cPos[1]*curScale)/(mag*curScale);
 		var mult=Math.sin( Math.min(1,Math.max(0,(mag-curScale)/3)) * (3.14159265/2) );
-		placeX=offX;
-		placeY=offY;
+		placeX=Math.max(-cPos[2], Math.min( sW, offX));
+		placeY=Math.max(-cPos[3], Math.min( sH, offY));
 		mag=Math.max(.08,mag*curScale);
 
 		dynScale=mag;
@@ -220,7 +223,9 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 		if(Math.abs(curScale-mag)<.05){
 			$("#"+id).attr('doubleTouch',0);
 		}
-		$("#"+id).attr('curScale',mag);
+		if(mButton!=2){
+			$("#"+id).attr('curScale',mag);
+		}
 	}
 }
 
