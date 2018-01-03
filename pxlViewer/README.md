@@ -1,6 +1,6 @@
 A PyQt and WebView based image viewer.
 
-*(Work in progress)*
+*(Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
 
 
 I was getting a little annoyed at the default options in linux without needing to open GIMP or ImageMagic; so I made this.
