@@ -683,7 +683,7 @@ class EntryViewer(QtWebKit.QWebView):
 		
 	def mousePressEvent(self, e):
 		self.offset=e.pos()
-		self.mouseDown=1
+		self.mouseDown=e.button()
 		self.updateVariable("mouseX",self.offset.x())
 		self.updateVariable("mouseY",self.offset.y())
 		self.updateVariable("origMouseX",self.offset.x())
@@ -693,18 +693,20 @@ class EntryViewer(QtWebKit.QWebView):
 		self.mouseDown=0
 		super(EntryViewer,self).page().mainFrame().evaluateJavaScript("endDrag();dragging=0;");
 		self.updateVariable("dragCount",0)
+		self.updateVariable("mButton",-1)
 	def mouseMoveEvent(self, e):
 		if type(self.offset)!=QtCore.QPoint:
 			self.offset=e.pos();
-		if self.mouseDown:
-			if self.mouseDrag==0:
-				super(EntryViewer,self).page().mainFrame().evaluateJavaScript("startDrag();");
+		if self.mouseDown>0:
 			self.offset=e.pos();
 			self.updateVariable("mouseX",self.offset.x())
 			self.updateVariable("mouseY",self.offset.y())
 			self.updateVariable("dragging",1)
-			self.mouseDrag+=1
+			self.updateVariable("mButton",self.mouseDown)
+			if self.mouseDrag==0:
+				super(EntryViewer,self).page().mainFrame().evaluateJavaScript("startDrag();");
 			super(EntryViewer,self).page().mainFrame().evaluateJavaScript("doDrag(0);");
+			self.mouseDrag+=1
 		else:
 			self.mouseDrag=0
 	@QtCore.pyqtSlot(str)
