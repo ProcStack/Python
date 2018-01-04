@@ -10,15 +10,15 @@ ______________________________
 
 I've linked it to an alias for ease of use; in my *.bash_aliases* file I added-
 
-`*alias v='python /your/path/to/pxlViewer/viewer.py '*`
+*`alias v='python /your/path/to/pxlViewer/viewer.py '`*
 -----------------------------------
 
 It can be ran locally from any folder--
 
-`*v imageFile.jpg*`
+*`v imageFile.jpg`*
 -----------------------------------
 
-`*-debug*` , `*-d*`   ; flag to enter debug mode
+*`-debug`* , *`-d`*   ; flag to enter debug mode
 
 `Left click` drag to move image around
 
