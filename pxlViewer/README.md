@@ -1,4 +1,5 @@
 A PyQt and WebView based image viewer.
+-----------------------------------
 
 *(ALPHA; Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
 
@@ -10,18 +11,19 @@ ______________________________
 I've linked it to an alias for ease of use; in my *.bash_aliases* file I added-
 
 *alias v='python /your/path/to/pxlViewer/viewer.py '*
+-----------------------------------
 
-and I'd run the script like this-
+It can be ran locally from any folder--
 
 *v imageFile.jpg*
 -----------------------------------
 
-*-d* flag to enter debug mode
+*-d* - flag to enter debug mode
 
-Left click drag to move image around
+`Left click` drag to move image around
 
-Wheel up/down or right click drag to zoom *(Right click zoom is WIP)*
+`Wheel up/down` or `right click drag` to zoom *(Right click zoom is WIP)*
 
-Double click to reset image location and zoom. *(Seems buggy right now)*
+`Double click any button` to reset image location and zoom. *(Seems buggy right now, click more than twice in a row)*
 
-Escape to close pxlViewer
+`Escape` to close pxlViewer
