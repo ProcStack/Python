@@ -192,8 +192,6 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 			cPos[1]=parseInt($("#imgBlock").attr('offY'));
 			cPos[2]=$("#imgBlock").attr('curSizeW');
 			cPos[3]=$("#imgBlock").attr('curSizeH');
-
-$("#verbText").html(origMouseX+" - "+origMouseY +" -- "+cPos[2]+" - "+cPos[3] );
 		}
 		var curPercX=(mPos[0]-cPos[0])/cPos[2];
 		var curPercY=(mPos[1]-cPos[1])/cPos[3];
