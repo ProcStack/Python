@@ -1,4 +1,4 @@
-# **pxlViewer**  *v0.0.2*
+# **pxlViewer**  *v0.0.3*
 -----------------------------------
 ### **A PyQt and WebView based image viewer.**
 
