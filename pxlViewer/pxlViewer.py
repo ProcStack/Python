@@ -1,8 +1,8 @@
 ############################################
-## pxlViewer v0.0.2                       ##
+## pxlViewer v0.0.3                       ##
 ## Image Viewer                           ##
 ##  Written by Kevin Edzenga; ~2017       ##
-##   http://metal-asylum.net              ##
+##   http://Metal-Asylum.net              ##
 ##                                        ##
 ## For aditional work, see my github-     ##
 ##  https://github.com/procstack          ##
@@ -34,19 +34,23 @@ else:
 
 curDir=os.getcwd()
 
-viewVersion="v0.0.2"
+viewVersion="v0.0.3"
 
 class ImageProcessor(QtGui.QMainWindow):
 	def __init__(self, parent=None):
 		super(ImageProcessor,self).__init__(parent)
 		global viewVersion
+		global sW
+		global sH
 		scriptNameText="pxlViewer"
 		versionText=scriptNameText+" - "+str(viewVersion)
 		self.setWindowTitle(versionText)
-		self.winSize=[600,400]
+		self.winSize=[720,405]
 		self.setMinimumSize(self.winSize[0],self.winSize[1])
 		self.resize(self.winSize[0],self.winSize[1])
 		#self.setStyleSheet("padding:0px;")	
+		
+		self.move((sW-self.winSize[0])/2,(sH-self.winSize[1])/2);
 		
 		self.websiteName=""
 		self.websiteSettingsFile=""
@@ -721,6 +725,9 @@ class EntryViewer(QtWebKit.QWebView):
 			print message
 if __name__ == '__main__':
 	app = QtGui.QApplication(sys.argv)
+	screen=app.desktop().screenGeometry()
+	sW=screen.width()
+	sH=screen.height()
 	galGen=ImageProcessor()
 	galGen.show()
 	try:
