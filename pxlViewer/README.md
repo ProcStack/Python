@@ -3,7 +3,7 @@
 ### **A PyQt and WebView based image viewer.**
 
 
-*(ALPHA; Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
+*(Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
 
 
 I was getting a little tired of the default options in linux; so I made this.
