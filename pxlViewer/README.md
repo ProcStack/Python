@@ -1,4 +1,4 @@
-# **pxlViewer** v0.0.1
+# **pxlViewer**  *v0.0.2*
 -----------------------------------
 ### **A PyQt and WebView based image viewer.**
 
@@ -19,13 +19,12 @@ It can be ran locally from any folder--
 
 **`v imageFile.jpg`**
 
-**`-debug`** , **`-d`**   ; flag to enter debug mode
+Using the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
 
 **`Left click`** drag to move image around
 
-**`Wheel up/down`** or **`right click drag`** to zoom *(Right click zoom is WIP)*
+**`Wheel up/down`** or **`right click drag`** to zoom
 
-**`Double click any button`** or **`resize the window`** will reset the zoom; fits the image to your window.
-*(Clicking seems buggy right now, click more than twice in a row)*
+Hitting **`Spacebar`**, **`H`**, or **`Return`** will reset the zoom; fitting the image to your window.
 
-**`Escape`** to close pxlViewer
+**`Escape`** will close pxlViewer
