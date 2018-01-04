@@ -6,7 +6,9 @@
 *(Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
 
 
-I was getting a little tired of the default options in linux; so I made this.
+I was getting a little tired of the default options in linux; so I made this thing.
+
+http://metal-asylum.net/github/pxlViewer.gif
 
 ______________________________
 
