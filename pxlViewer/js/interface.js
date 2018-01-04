@@ -86,6 +86,7 @@ function endDrag() {
 	$("#imgBlock").attr('curSizeW', parseInt($("#imgBlock").width()) );
 	$("#imgBlock").attr('curSizeH', parseInt($("#imgBlock").height()) );
 	dragCount=0;
+	$("#touchData").attr("curScale", dynScale);
 }
 
 
@@ -147,6 +148,7 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 	}
 	var placeX,placeY;
 	var mag;
+	var minMag=.08;
 	if(init != -1){
 		if(zoomOffset == -1){
 			mag=mouseX-mPos[0]; // Dragging zoom ammount
@@ -192,6 +194,7 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 			cPos[1]=parseInt($("#imgBlock").attr('offY'));
 			cPos[2]=$("#imgBlock").attr('curSizeW');
 			cPos[3]=$("#imgBlock").attr('curSizeH');
+
 		}
 		var curPercX=(mPos[0]-cPos[0])/cPos[2];
 		var curPercY=(mPos[1]-cPos[1])/cPos[3];
@@ -202,16 +205,22 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 		var offX=-origPosX*mag+mPos[0];//(curPercX*(cPos[2]*curScale)-cPos[0]*curScale)/(mag*curScale);
 		var offY=-origPosY*mag+mPos[1];//(curPercY*(cPos[3]*curScale)-cPos[1]*curScale)/(mag*curScale);
 		var mult=Math.sin( Math.min(1,Math.max(0,(mag-curScale)/3)) * (3.14159265/2) );
-		placeX=Math.max(-cPos[2], Math.min( sW, offX));
-		placeY=Math.max(-cPos[3], Math.min( sH, offY));
+		//placeX=Math.max(-cPos[2], Math.min( sW, offX));
+		//placeY=Math.max(-cPos[3], Math.min( sH, offY));
+		placeX= offX;
+		placeY= offY;
 		mag=Math.max(.08,mag*curScale);
 
 		dynScale=mag;
 	}
 	//$("#"+asset).css({"transition": "all .03s linear","-moz-transition": "all .03s linear","-webkit-transition":"all .03s linear","-ms-transition": "all .03s linear","-o-transition": "all .03s linear"});
 	
-	$("#"+asset).css({'left':(placeX)+'px','top':(placeY)+'px'});
-    $("#"+asset).css({'height':(imgHeight*mag)+'px','width':(imgWidth*mag)+'px'});
+	if(mag != minMag){
+		//tickVerboseCounter();
+		//$("#verbText").html(mag+" - "+curScale+" -- "+minMag);
+		$("#"+asset).css({'left':(placeX)+'px','top':(placeY)+'px'});
+		$("#"+asset).css({'height':(imgHeight*mag)+'px','width':(imgWidth*mag)+'px'});
+	}
     //$("#"+asset).css({'transform':'scale('+mag+', '+mag+')','-moz-transform':'scale('+mag+', '+mag+')','-webkit-transform':'scale('+mag+', '+mag+')','-ms-transform':'scale('+mag+', '+mag+')','-o-transform':'scale('+mag+', '+mag+')'});
 
 	$("#scaleText").text((parseInt(mag*100*100)/100)+" %");
@@ -222,9 +231,17 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 			$("#"+id).attr('doubleTouch',0);
 		}
 		if(mButton!=2){
-			$("#"+id).attr('curScale',mag);
+			$("#"+id).attr('curScale',mag);	
 		}
 	}
+}
+function tickVerboseCounter(){
+	var curcount=$("#verbText").text();
+	if(curcount==""){
+		curcount=0;
+	}
+	curcount=parseInt(curcount)+1;
+	$("#verbText").html(curcount);
 }
 
 function print(){

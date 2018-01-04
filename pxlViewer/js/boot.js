@@ -82,3 +82,50 @@ function checkMouse(e){
 	}
 	return false;
 }
+
+
+/*
+$(document).on('keypress', function(e){
+	//if((openDialogue != "contactMe" || dialogueOpen==0) && typingFocus==0){
+	if(dialogueOpen==0 && typingFocus==0){
+		keyHit=e.keyCode || e.which;
+		if(printKey==1){
+			$("#alertFeed1").html(keyHit);
+		}
+		var nullKeys=[9,13,32,37,38,39,40,81,83,90,102]; // Do nothing keys
+		if(nullKeys.indexOf(keyHit) != -1){
+			return false;
+		}
+		if(active == 1){
+			var numKeys=[49,50,51,52,53,54,55,56,57,48]; // Number keys
+			if(numKeys.indexOf(keyHit) != -1){
+				if(storeKeyHold==0){
+					storeKeyHold=1;
+					keyHoldCheck("storeSwatchColorSphere('colorSphereCanvas',"+keyHit+");");
+				}
+				return false;
+			}
+			// ` ~
+			if(keyHit===96){
+				if(storeKeyHold==0){
+					storeKeyHold=1;
+					keyHoldCheck("resetColorSphere('colorSphereCanvas',1,0);");
+				}
+				return false;
+			}
+		}
+	}
+});*/
+$(document).on('keyup', function(e){
+	keyHit=e.keyCode || e.which;
+	var nullKeys=[9,37,38,39,40];
+	if(nullKeys.indexOf(keyHit) != -1){
+		return false;
+	}
+	//Space & H & Return
+	var resetKeys=[32,72,13];
+	if(resetKeys.indexOf(keyHit) != -1){
+		resize(0);
+		return false;
+	}
+});
