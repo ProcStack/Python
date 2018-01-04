@@ -18,7 +18,7 @@ It can be ran locally from any folder--
 *v imageFile.jpg*
 -----------------------------------
 
-*-d* - flag to enter debug mode
+*-d*    flag to enter debug mode
 
 `Left click` drag to move image around
 
