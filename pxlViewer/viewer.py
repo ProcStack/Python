@@ -1,5 +1,5 @@
 ############################################
-## pxlViewer v0.0.1                       ##
+## pxlViewer v0.0.2                       ##
 ## Image Viewer                           ##
 ##  Written by Kevin Edzenga; ~2017       ##
 ##   http://metal-asylum.net              ##
@@ -34,14 +34,14 @@ else:
 
 curDir=os.getcwd()
 
-viewVersion="0.0.1"
+viewVersion="v0.0.2"
 
 class ImageProcessor(QtGui.QMainWindow):
 	def __init__(self, parent=None):
 		super(ImageProcessor,self).__init__(parent)
 		global viewVersion
 		scriptNameText="pxlViewer"
-		versionText=scriptNameText+" - v"+str(viewVersion)
+		versionText=scriptNameText+" - "+str(viewVersion)
 		self.setWindowTitle(versionText)
 		self.winSize=[600,400]
 		self.setMinimumSize(self.winSize[0],self.winSize[1])
