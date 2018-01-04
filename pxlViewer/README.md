@@ -25,6 +25,7 @@ It can be ran locally from any folder--
 
 **`Wheel up/down`** or **`right click drag`** to zoom *(Right click zoom is WIP)*
 
-**`Double click any button`** or **`resize the window`** will reset the zoom; fits the image to your window. *(Seems buggy right now, click more than twice in a row)*
+**`Double click any button`** or **`resize the window`** will reset the zoom; fits the image to your window.
+*(Clicking seems buggy right now, click more than twice in a row)*
 
 **`Escape`** to close pxlViewer
