@@ -1,5 +1,5 @@
 ############################################
-## pxlViewer v0.0.3                       ##
+## pxlViewer v0.0.4                       ##
 ## Image Viewer                           ##
 ##  Written by Kevin Edzenga; ~2017       ##
 ##   http://Metal-Asylum.net              ##
@@ -34,7 +34,15 @@ else:
 
 curDir=os.getcwd()
 
-viewVersion="v0.0.3"
+viewVersion="v0.0.4"
+
+# Fork the python session and close the parent session
+# Keep terminal active for later usage
+pid=os.fork()
+if pid == 0:
+	os.setsid()
+else:
+	exit()
 
 class ImageProcessor(QtGui.QMainWindow):
 	def __init__(self, parent=None):
