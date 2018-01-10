@@ -3,7 +3,7 @@
 ### **A PyQt and WebView based image viewer.**
 
 
-*(Work in progress; will compile to PyInstaller shortly; currently intended for linux)*
+*(Currently only intended for linux)*
 
 
 I was getting a little tired of the default options in linux; so I made this thing.
@@ -23,7 +23,7 @@ It can be ran locally from any folder--
 
 Using the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
 
-**`Left click`** drag to move image around
+**`Left click drag`** to move image around
 
 **`Wheel up/down`** or **`right click drag`** to zoom
 
