@@ -21,7 +21,7 @@ It can be ran locally from any folder--
 
 **`v imageFile.jpg`**
 
-Using the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
+Use the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
 
 **`Left click drag`** to move image around
 
