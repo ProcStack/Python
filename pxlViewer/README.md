@@ -1,4 +1,4 @@
-# **pxlViewer**  *v0.0.3*
+# **pxlViewer**  *v0.0.4*
 -----------------------------------
 ### **A PyQt and WebView based image viewer.**
 
@@ -28,5 +28,7 @@ Using the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspect
 **`Wheel up/down`** or **`right click drag`** to zoom
 
 Hitting **`Spacebar`**, **`H`**, or **`Return`** will reset the zoom; fitting the image to your window.
+
+**`R`** to refresh the current image
 
 **`Escape`** will close pxlViewer
