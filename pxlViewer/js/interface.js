@@ -227,6 +227,7 @@ function zoomLayers(id,asset, mPos,cPos,init, zoomOffset){
 	if(storeKeyHold==1 && $("#"+id).attr('doubleTouch')==0){
 		setTimeout(function(){zoomLayers(id,asset, mPos,cPos,init, zoomOffset);},100);
 	}else{
+		dynScale=mag;
 		if(Math.abs(curScale-mag)<.05){
 			$("#"+id).attr('doubleTouch',0);
 		}
@@ -375,6 +376,12 @@ function countdown(func,countDown){
 		setTimeout(function(){countdown(func,countDown)},100);
 	}
 }
+
+function checkExt(){
+	imgPath=$("#imgDisp").attr("src");
+	//$("#verbText").html(" - "+imgPath +" -- ");
+}
+
 function setEntryImage(imgPath, w,h){
 	imgPathDate=imgPath+"?"+new Date().getTime();
 	$("#imgDisp").attr("src", imgPathDate);
@@ -382,6 +389,13 @@ function setEntryImage(imgPath, w,h){
 	var imgName=imgPath.split("/")
 	imgName=imgName[imgName.length-1]
 	setEntryText(imgName);
+}
+function refreshImage(){
+	var curImg=$("#imgDisp").attr("src");
+	var tm=new Date().getTime();
+	imgPathDate=curImg+"?"+tm;
+	//loadImg(imgPathDate,w,h);
+	$("#imgDisp").attr("src", imgPathDate);
 }
 function setEntryText(txt){
 	$("#entryText").text(txt);

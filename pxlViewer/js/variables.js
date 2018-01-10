@@ -23,6 +23,7 @@ var dragging=0;
 var dragCount=-1;
 var curDrag=0;
 var scalePerc=1;
+var dynScale=1;
 var touch =0;
 var touchScreen=0;
 var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" ;

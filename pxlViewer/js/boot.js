@@ -3,8 +3,10 @@ function init(){
 	document.onmousemove = function(e){getMouseXY;if(rightDown==1){ dragZoom();}};
 	document.onscroll=function(){return false;};
 	
-	document.onmousedown=function(e) {console.log('etest');checkMouse;};
+	document.onmousedown=function(e) {checkMouse;};
 	document.onmouseup=function(){rightDown=0;};
+	
+	checkExt();
 	
 	resize(0);
 	
@@ -126,6 +128,11 @@ $(document).on('keyup', function(e){
 	var resetKeys=[32,72,13];
 	if(resetKeys.indexOf(keyHit) != -1){
 		resize(0);
+		return false;
+	}
+	// R
+	if(keyHit == 82){
+		refreshImage();
 		return false;
 	}
 });
