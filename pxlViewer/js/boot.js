@@ -86,37 +86,9 @@ function checkMouse(e){
 }
 
 
-/*
-$(document).on('keypress', function(e){
-	//if((openDialogue != "contactMe" || dialogueOpen==0) && typingFocus==0){
-	if(dialogueOpen==0 && typingFocus==0){
-		keyHit=e.keyCode || e.which;
-		if(printKey==1){
-			$("#alertFeed1").html(keyHit);
-		}
-		var nullKeys=[9,13,32,37,38,39,40,81,83,90,102]; // Do nothing keys
-		if(nullKeys.indexOf(keyHit) != -1){
-			return false;
-		}
-		if(active == 1){
-			var numKeys=[49,50,51,52,53,54,55,56,57,48]; // Number keys
-			if(numKeys.indexOf(keyHit) != -1){
-				if(storeKeyHold==0){
-					storeKeyHold=1;
-					keyHoldCheck("storeSwatchColorSphere('colorSphereCanvas',"+keyHit+");");
-				}
-				return false;
-			}
-			// ` ~
-			if(keyHit===96){
-				if(storeKeyHold==0){
-					storeKeyHold=1;
-					keyHoldCheck("resetColorSphere('colorSphereCanvas',1,0);");
-				}
-				return false;
-			}
-		}
-	}
+/*$(document).on('keypress', function(e){
+	keyHit=e.keyCode || e.which;
+	returnMessage(keyHit);
 });*/
 $(document).on('keyup', function(e){
 	keyHit=e.keyCode || e.which;
@@ -133,6 +105,11 @@ $(document).on('keyup', function(e){
 	// R
 	if(keyHit == 82){
 		refreshImage();
+		return false;
+	}
+	// Alt
+	if(keyHit == 18){
+		returnMessage("toggleMenuBarVis");
 		return false;
 	}
 });

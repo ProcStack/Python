@@ -406,7 +406,10 @@ function returnValue(variable,value){
 function returnMessage(msg){
 	opWin.showMessage(msg);
 }
-
+//Not implimented yet
+function toggleInfoWindow(){
+	$("#verbText").html(" -  -- ");
+}
 
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
