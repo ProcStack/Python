@@ -1,5 +1,5 @@
 ############################################
-## pxlViewer v0.0.4                       ##
+## pxlViewer v0.0.5                       ##
 ## Image Viewer                           ##
 ##  Written by Kevin Edzenga; ~2017       ##
 ##   http://Metal-Asylum.net              ##
@@ -7,11 +7,13 @@
 ## For aditional work, see my github-     ##
 ##  https://github.com/procstack          ##
 ############################################
+
 """
- 
- Stay awesome and open source for life!
- 
+ Learning should be a shared experiance
 """
+
+scriptNameText="pxlViewer"
+viewVersion="v0.0.5"
 
 import zlib
 import bz2
@@ -34,15 +36,18 @@ else:
 
 curDir=os.getcwd()
 
-viewVersion="v0.0.4"
-
-# Fork the python session and close the parent session
-# Keep terminal active for later usage
-pid=os.fork()
-if pid == 0:
-	os.setsid()
-else:
-	exit()
+verbose=0
+if sys.argv[1] in ["-v","-verb", "-verbose"]:
+	verbose=1
+	
+if verbose == 0:
+	# Fork the python session and close the parent session
+	# Keep terminal active for later usage
+	pid=os.fork()
+	if pid == 0:
+		os.setsid()
+	else:
+		exit()
 
 class ImageProcessor(QtGui.QMainWindow):
 	def __init__(self, parent=None):
@@ -50,7 +55,7 @@ class ImageProcessor(QtGui.QMainWindow):
 		global viewVersion
 		global sW
 		global sH
-		scriptNameText="pxlViewer"
+		global scriptNameText
 		versionText=scriptNameText+" - "+str(viewVersion)
 		self.setWindowTitle(versionText)
 		self.winSize=[720,405]
@@ -84,31 +89,8 @@ class ImageProcessor(QtGui.QMainWindow):
 		# Disabled, Active, Inactive, Normal
 		
 		self.setWindowStyleSheet()
-		"""
-		### Menu Bar ###
-		self.menuBar=self.menuBar()
-		fileMenu=self.menuBar.addMenu('File')
-		loadItem=QtGui.QAction("Load Optimized Site",self)
-		fileMenu.addAction(loadItem)
-		fileMenu.addSeparator()
-		saveItem=QtGui.QAction("Save",self)
-		fileMenu.addAction(saveItem)
-		saveAsItem=QtGui.QAction("Save As...",self)
-		fileMenu.addAction(saveAsItem)
-		fileMenu.addSeparator()
-		quitItem=QtGui.QAction("Exit",self)
-		quitItem.triggered.connect(self.quitApp)
-		fileMenu.addAction(quitItem)
-		self.infoMenu=self.menuBar.addMenu('Info')
-		infoItem=QtGui.QAction(scriptNameText+" Info",self)
-		self.infoMenu.addAction(infoItem)
-		self.infoMenu.addSeparator()
-		helpItem=QtGui.QAction("Help...",self)
-		#helpItem.hovered.connect(self.setCursorPointing)
-		self.infoMenu.addAction(helpItem)
-		# Status Bar
-		#self.statusBar=self.statusBar()
-		"""
+		
+		
 		self.mainLayout=QtGui.QVBoxLayout(self.mainWidget)
 		pad=0
 		self.mainLayout.setSpacing(pad)
@@ -116,21 +98,11 @@ class ImageProcessor(QtGui.QMainWindow):
 		selfSize=self.geometry()
 		#menuSize=self.menuBar.geometry()
 		selfSize=[selfSize.width(), selfSize.height()]#-menuSize.height()]
-
-		#tabBlock=QtGui.QTabWidget()
-		#tabBlock.resize(selfSize[0], selfSize[1])
-		#tab0=QtGui.QWidget()
-		#tab1=QtGui.QWidget()
-		#tab2=QtGui.QWidget()
-		#tabBlock.addTab(tab0,"Site Images")
-		#tabBlock.addTab(tab1,"Site Code")
-		#tabBlock.addTab(tab2,"Image Gallery")
-		#self.mainLayout.addWidget(tabBlock)
 		
 		# Load directory text field
 		self.imageDisplayBlock=QtGui.QVBoxLayout()
 		self.imgField=QtGui.QLabel()
-		self.imgField.setText("Please select the folder containing\n your full sized images.")
+		self.imgField.setText("[: Something didn't load right :]\n[: Cause this is an error in python, not javascript... :]")
 		self.imgField.setAlignment(QtCore.Qt.AlignCenter)
 		self.imageDisplayBlock.addWidget(self.imgField)
 		self.imgSpacer=QtGui.QSpacerItem(20,40,QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -145,6 +117,33 @@ class ImageProcessor(QtGui.QMainWindow):
 
 		# Load image
 		self.loadAndScanDir(curDir+"/"+sys.argv[-1])
+	def menuBarVis(self,tgl):
+		if tgl == 1:
+			### Menu Bar ###
+			try:
+				self.menuBar=self.menuBar()
+				fileMenu=self.menuBar.addMenu('File')
+				#saveAsItem=QtGui.QAction("Save As...",self)
+				#fileMenu.addAction(saveAsItem)
+				#fileMenu.addSeparator()
+				#infoItem=QtGui.QAction("Info",self)
+				#infoItem.triggered.connect(partial(self.menuCommand, "toggleInfoWindow"))
+				#fileMenu.addAction(infoItem)
+				#fileMenu.addSeparator()
+				quitItem=QtGui.QAction("Exit",self)
+				quitItem.triggered.connect(self.quitApp)
+				fileMenu.addAction(quitItem)
+				#self.infoMenu.addAction(infoItem)
+				#self.infoMenu.addSeparator()
+				#helpItem=QtGui.QAction("Help...",self)
+				#helpItem.hovered.connect(self.setCursorPointing)
+				#self.infoMenu.addAction(helpItem)
+				# Status Bar
+				#self.statusBar=self.statusBar()
+			except:
+				self.menuBar.setVisible(1);
+		else:
+			self.menuBar.setVisible(0);
 	def setCursorPointing(self):
 		QtGui.QWidget.setCursor(self.infoMenu,QtCore.Qt.PointingHandCursor)
 	def setCursorArrow(self):
@@ -176,11 +175,11 @@ class ImageProcessor(QtGui.QMainWindow):
 		QLineEdit {color:#ffffff;background-color:#909090;padding:2px;border:1px solid #202020;}
 		QScrollArea {color:#ffffff;background-color:#808080;border:1px solid #202020;}
 		QAction {color:#ffffff;background-color:#808080;border:1px solid #202020;}
-		QMenuBar {color:#ffffff;background-color:#606060;border:1px solid #202020;}
-		QMenuBar::item {color:#ffffff;background-color:#707070;padding:2px;border:1px solid #505050;}
-		QMenu {color:#ffffff;background-color:#707070;border:1px solid #404040;}
-		QMenu::item {color:#ffffff;background-color:#707070;padding:2px;}
-		QMenu::item:selected {color:#ffffff;background-color:#9c9c9c;padding:2px;}
+		QMenuBar {color:#ffffff;background-color:#303030;border:1px solid #202020;}
+		QMenuBar::item {color:#ffffff;background-color:#404040;padding:2px;border:1px solid #202020;}
+		QMenu {color:#ffffff;background-color:#505050;border:1px solid #282828;}
+		QMenu::item {color:#ffffff;background-color:#505050;padding:2px;}
+		QMenu::item:selected {color:#ffffff;background-color:#6c6c6c;padding:2px;}
 		QSlider {background-color:#323232;}
 		QScrollBar:vertical {width:10px;color:#ffffff;background-color:#808080;border:1px solid #202020;}
 		QStatusBar {color:#ffffff;background-color:#606060;border:1px solid #202020;}"""
@@ -240,22 +239,6 @@ class ImageProcessor(QtGui.QMainWindow):
 				tmpBlock.addWidget(tmpText)
 				imgSpacer=QtGui.QSpacerItem(20,40,QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
 				tmpBlock.addItem(imgSpacer)
-				#self.imageDisplayBlock.addLayout(tmpBlock)
-				"""
-				imagePath=QtGui.QFileDialog(self,"Full Image Directory", "directory", filter)
-				imagePath.setFileMode(QtGui.QFileDialog.DirectoryOnly)
-				#imagePath.setSidebarUrls([QtCore.QUrl.fromLocalFile(place)])
-				if imagePath.exec_() == QtGui.QDialog.Accepted:
-					self.fullDir=imagePath.selectedFiles()[0]
-					print self.fullDir
-				
-				
-				dialog = QtGui.QFileDialog(self, 'Audio Files', directory, filter)
-				dialog.setFileMode(QtGui.QFileDialog.DirectoryOnly)
-				dialog.setSidebarUrls([QtCore.QUrl.fromLocalFile(place)])
-				if dialog.exec_() == QtGui.QDialog.Accepted:
-					self._audio_file = dialog.selectedFiles()[0]
-				"""
 			else:
 				
 				sizeSub=100
@@ -284,7 +267,6 @@ class ImageProcessor(QtGui.QMainWindow):
 				
 				curEntryEditScrollBlock.setWidget(curEntryEditScrollInner)
 				entryEditBlock.addWidget(curEntryEditScrollBlock)
-				
 				
 				
 				#curEntryEditScrollInner.addLayout(self.curEntryBlock)
@@ -366,10 +348,6 @@ class ImageProcessor(QtGui.QMainWindow):
 		### SETTINGS ###
 		self.curEntryObj=obj # Still don't know if this dupelicates the object in memory, hahah
 		imgFull=obj.imgSizeFull
-		#self.imgFullPerc=obj.imgSizeFull
-		#self.imgFullTilePerc=obj.imgSizeFullTile
-		#self.imgMedPerc=obj.imgSizeMed
-		#self.imgThumbPerc=obj.imgSizeThumb
 
 		### MAIN ENTRY ###
 		self.clearLayout(self.curEntryBlock)
@@ -381,136 +359,10 @@ class ImageProcessor(QtGui.QMainWindow):
 		self.curEntryBlock.setMargin(0)
 		pol=QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
 		self.editViewWindow.setSizePolicy(pol)
-		"""
-		### Sliders and Jazz ###
-		### Full ###
-		curImageFullSettings=QtGui.QHBoxLayout()
-		fullSizeText=QtGui.QLabel()
-		fullSizeText.setText("Full Size -")
-		fullSizeText.setMinimumWidth(150)
-		#fullSizeText.setAlignment(QtCore.Qt.AlignCenter)
-		curImageFullSettings.addWidget(fullSizeText)
-		
-		self.sliderFull=QtGui.QSlider()
-		self.sliderFull.setOrientation(QtCore.Qt.Horizontal)
-		self.sliderFull.setMinimum(.01)
-		self.sliderFull.setMaximum(100)
-		curVal=self.imgFullPerc
-		self.sliderFull.setValue(curVal)
-		curImageFullSettings.addWidget(self.sliderFull)
-		# Tile value
-		# self.imgFullTilePerc
-		
-		self.fullSizeVal=QtGui.QLabel()
-		self.fullSizeVal.setText(str(imgFull[0]*curVal/100)+"x"+str(imgFull[1]*curVal/100))
-		self.fullSizeVal.setMinimumWidth(90)
-		self.fullSizeVal.setAlignment(QtCore.Qt.AlignRight)
-		curImageFullSettings.addWidget(self.fullSizeVal)
-		
-		self.curImageSettings.addLayout(curImageFullSettings)
-		self.sliderFull.valueChanged.connect(partial(self.sliderPercChange,0))
-		# 1 will be full sized tile scales
-		#self.sliderFull.valueChanged.connect(self.sliderPercChange(1))
-		
-		### Medium ###
-		curImageMedSettings=QtGui.QHBoxLayout()
-		medSizeText=QtGui.QLabel()
-		medSizeText.setText("Medium Size -")
-		medSizeText.setMinimumWidth(150)
-		#medSizeText.setAlignment(QtCore.Qt.AlignRight)
-		curImageMedSettings.addWidget(medSizeText)
-		
-		self.sliderMed=QtGui.QSlider()
-		self.sliderMed.setOrientation(QtCore.Qt.Horizontal)
-		self.sliderMed.setMinimum(.01)
-		self.sliderMed.setMaximum(100)
-		curVal=self.imgMedPerc
-		self.sliderMed.setValue(curVal)
-		curImageMedSettings.addWidget(self.sliderMed)
-		
-		self.medSizeVal=QtGui.QLabel()
-		self.medSizeVal.setText(str(imgFull[0]*curVal/100)+"x"+str(imgFull[1]*curVal/100))
-		self.medSizeVal.setMinimumWidth(90)
-		self.medSizeVal.setAlignment(QtCore.Qt.AlignRight)
-		curImageMedSettings.addWidget(self.medSizeVal)
-		self.curImageSettings.addLayout(curImageMedSettings)
-		self.sliderMed.valueChanged.connect(partial(self.sliderPercChange,2))
-		
-		curImageThumbSettings=QtGui.QHBoxLayout()
-		thumbSizeText=QtGui.QLabel()
-		thumbSizeText.setText("Thumbnail Size -")
-		thumbSizeText.setMinimumWidth(150)
-		#thumbSizeText.setAlignment(QtCore.Qt.AlignCenter)
-		curImageThumbSettings.addWidget(thumbSizeText)
-		
-		self.sliderThumb=QtGui.QSlider()
-		self.sliderThumb.setOrientation(QtCore.Qt.Horizontal)
-		self.sliderThumb.setMinimum(.01)
-		self.sliderThumb.setMaximum(100)
-		curVal=self.imgThumbPerc
-		self.sliderThumb.setValue(curVal)
-		curImageThumbSettings.addWidget(self.sliderThumb)
-		
-		self.thumbSizeVal=QtGui.QLabel()
-		self.thumbSizeVal.setText(str(imgFull[0]*curVal/100)+"x"+str(imgFull[1]*curVal/100))	
-		self.thumbSizeVal.setMinimumWidth(90)
-		self.thumbSizeVal.setAlignment(QtCore.Qt.AlignRight)
-		curImageThumbSettings.addWidget(self.thumbSizeVal)
-		self.curImageSettings.addLayout(curImageThumbSettings)
-		self.sliderThumb.valueChanged.connect(partial(self.sliderPercChange,3))
-		
-		### Compression Settings ###
-		
-		curQualitySettings=QtGui.QHBoxLayout()
-		qualityText=QtGui.QLabel()
-		qualityText.setText("Quality -")
-		qualityText.setMinimumWidth(100)
-		#thumbSizeText.setAlignment(QtCore.Qt.AlignCenter)
-		curQualitySettings.addWidget(qualityText)
-		
-		self.sliderQuality=QtGui.QSlider()
-		self.sliderQuality.setOrientation(QtCore.Qt.Horizontal)
-		self.sliderQuality.setMinimum(1)
-		self.sliderQuality.setMaximum(100)
-		curVal=50
-		self.sliderQuality.setValue(curVal)
-		curQualitySettings.addWidget(self.sliderQuality)
-		
-		self.qualityVal=QtGui.QLabel()
-		self.qualityVal.setText(str(curVal)+"%")	
-		self.qualityVal.setMinimumWidth(90)
-		self.qualityVal.setAlignment(QtCore.Qt.AlignRight)
-		curQualitySettings.addWidget(self.qualityVal)
-		self.curImageSettings.addLayout(curQualitySettings)
-		self.sliderQuality.valueChanged.connect(partial(self.sliderPercChange,4))
-		###
-		"""
+	def menuCommand(self, cmd):
+		self.editViewWindow.runCommand(cmd)
 	def updateGalleryVariables(self):
 		self.galleryName=self.globalGalleryName.text()
-	def sliderPercChange(self, updateSlider):
-		imgSize=self.curEntryObj.imgSizeFull
-		if updateSlider==4:
-			val=self.sliderQuality.value()
-			self.imgQualityPerc=val
-			sliderValText=self.qualityVal
-			sliderValText.setText(str(val)+"%")
-		else:
-			if updateSlider==0: # Full size image
-				val=self.sliderFull.value()
-				self.imgFullPerc=val
-				sliderValText=self.fullSizeVal
-			elif updateSlider==1: # Full Tile size
-				self.imgFullTilePerc
-				return None
-			elif updateSlider==2: # Medium size
-				val=self.sliderMed.value()
-				self.imgMedPerc=val
-				sliderValText=self.medSizeVal
-			elif updateSlider==3: # Thumb size
-				val=self.sliderThumb.value()
-				self.imgThumbPerc=val
-				sliderValText=self.thumbSizeVal
-			sliderValText.setText(str(imgSize[0]*val/100)+"x"+str(imgSize[1]*val/100))
 	def clearLayout(self, layout):
 		children=[]
 		postRemoveItem=[]
@@ -536,6 +388,9 @@ class ImageProcessor(QtGui.QMainWindow):
 		print "move"
 	"""
 	def keyPressEvent(self, e):
+		global verbose
+		if verbose:
+			print e
 		if e.key()==QtCore.Qt.Key_Escape:
 			self.quitApp()
 	def progressBar(self,init):
@@ -546,35 +401,6 @@ class ImageProcessor(QtGui.QMainWindow):
 		elif init >= 0:
 			val=0
 		return None
-			
-	def processImage(self):
-		compressorPath= bundleDir+"/compressor.py"
-		with open(compressorPath, 'r') as f:
-			fread=f.read()
-		exec(fread)
-		patternRecognition(self,self.curEntryObj,self.editViewWindow)
-
-	def processSite(self):
-		self.writeGalleryIndexFile(self)
-	def writeGalleryIndexFile(self):
-		maxEntryListPerVar=300
-		outDir=self.galleryName
-		outFile="galIndex.php"
-		curImgCount=0
-		curVarCount=0
-		out="""
-		<?php
-		$dispGalTitle=1;
-		"""
-		for x,i in enumerate(self.loadIndexList):
-			curImgCount=x
-			if curImgCount%maxEntryListPerVar == 0:
-				curVarCount+=1
-				out+="$imageGalleryData"+str(curVarCount)+"=array( \n"
-			#$imageGalleryData1=array( 
-			#'thumbs/IMAG1028_BURST011_th.jpg' => array('full/IMAG1028_BURST011.jpg','mid/IMAG1028_BURST011_mid.jpg','5197753','5376','3024','2','width="5376" height="3024"','width:5376;height:3024', 'IMAG1028_BURST011.jpg'),
-			with open(outFile, 'w') as f:
-				f.write(out)
 				
 	def resizeEvent(self, e):
 		return None
@@ -654,7 +480,8 @@ class EntryViewer(QtWebKit.QWebView):
 		self.mouseDown=0
 		self.mouseDrag=0
 		self.verbose=0
-		if sys.argv[1] in ["-s", "-sandbox","-sand","-v","-verb", "-verbose", "-d", "-debug"]:
+		self.menuVis=0
+		if sys.argv[1] in ["-v","-verb", "-verbose", "-d", "-debug"]:
 			self.verbose=1
 		self.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
 		self.settings().setUserStyleSheetUrl(QtCore.QUrl.fromLocalFile(bundleDir+"/style.css"))
@@ -729,6 +556,9 @@ class EntryViewer(QtWebKit.QWebView):
 		if message == "loaded":
 			if self.verbose==0:
 				self.runCommand("noContextMenu()")
+		elif message == "toggleMenuBarVis":
+			self.menuVis=(self.menuVis+1)%2
+			self.win.menuBarVis(self.menuVis)
 		else:
 			print message
 if __name__ == '__main__':
