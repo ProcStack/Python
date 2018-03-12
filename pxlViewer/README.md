@@ -1,4 +1,4 @@
-# **pxlViewer**  *v0.0.5*
+# **pxlViewer**  *v0.0.6*
 -----------------------------------
 ### **A PyQt and WebView based image viewer.**
 
@@ -8,7 +8,7 @@
 
 I was getting a little tired of the default options in linux; so I made this thing.
 
-http://metal-asylum.net/github/pxlViewer.gif
+http://metal-asylum.net/github/pxlViewer06Updates.gif
 
 ______________________________
 
@@ -18,10 +18,12 @@ I've linked it to an alias for ease of use; in my *.bash_aliases* file I added-
 
 
 It can be ran locally from any folder--
+With no specified file to load the first found image.
+**`v`**
 
+Or with a specific file given.
 **`v imageFile.jpg`**
-
-Use the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
+______________________________
 
 **`Left click drag`** to move image around
 
@@ -32,3 +34,16 @@ Hitting **`Spacebar`**, **`H`**, or **`Return`** will reset the zoom; fitting th
 **`R`** to refresh the current image
 
 **`Escape`** will close pxlViewer
+
+**`Left Key`** loads Previous image in directory.
+
+**`Right Key`** loads Next image in directory.
+
+**`F`** toggles full screen.
+
+**`Alt key`** toggles menuBar; displays 'File' 'Image Info' and 'Help.
+`Image Into` displays the file name, resolution, and file size of the image.
+`Help` displays keyboard shortcuts.
+
+Use the **`-debug`** or **`-d`** flag to enter debug mode.  Allows for inspecting the WebView's page; the developer tools window.
+
