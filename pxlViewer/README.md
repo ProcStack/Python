@@ -19,9 +19,11 @@ I've linked it to an alias for ease of use; in my *.bash_aliases* file I added-
 
 It can be ran locally from any folder--
 With no specified file to load the first found image.
+
 **`v`**
 
 Or with a specific file given.
+
 **`v imageFile.jpg`**
 ______________________________
 
