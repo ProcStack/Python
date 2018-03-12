@@ -18,11 +18,12 @@ I've linked it to an alias for ease of use; in my *.bash_aliases* file I added-
 
 
 It can be ran locally from any folder--
-With no specified file to load the first found image.
+
+With no specified file to load, the first image found is displayed.
 
 **`v`**
 
-Or with a specific file given.
+Or with a specific file given; currently only relative paths work. Sorry, absolute path support soon to come.
 
 **`v imageFile.jpg`**
 ______________________________
