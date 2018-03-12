@@ -8,8 +8,10 @@ function init(){
 	
 	checkExt();
 	
+	imgBlockObj=document.getElementById("imgBlock");
+	var attribList=['offX','offY','curSizeW','curSizeH',"curScale"];
+	attribList.checkAttrs("imgBlock");
 	resize(0);
-	
 }
 function noContextMenu(){
 	window.oncontextmenu = function () {
@@ -85,15 +87,73 @@ function checkMouse(e){
 	return false;
 }
 
+/*
+q=81
+z=90
+s=83
+f=70
+d=68
+c=67
+n=78
+m=77
+h=72
+r=82
+shift=16
+ctrl=17
+alt=18
+tab=9
+1=49
+2=50
+3=51
+4=52
+5=53
+6=54
+7=55
+8=56
+9=57
+0=48
+-=173
++=61
+`=192
+[=219
+]=221
+<=188
+>=190
+left=37
+up=38
+right=39
+down=40
+del=46
+ins=45
+home=36
+end=35
+pgUp=33
+pgDown=34
+*
+For numbers, check focus is not in text field-
+* document.activeElement
+*/
+
 
 /*$(document).on('keypress', function(e){
 	keyHit=e.keyCode || e.which;
 	returnMessage(keyHit);
 });*/
-$(document).on('keyup', function(e){
+//document.addEventListener('keypress', function(e){
+document.onkeyup=function(e){
 	keyHit=e.keyCode || e.which;
-	var nullKeys=[9,37,38,39,40];
+	var nullKeys=[9,38,40];
 	if(nullKeys.indexOf(keyHit) != -1){
+		return false;
+	}
+	// Left
+	if(keyHit == 37){
+		returnMessage("Left");
+		return false;
+	}
+	// Right
+	if(keyHit == 39){
+		returnMessage("Right");
 		return false;
 	}
 	//Space & H & Return
@@ -107,9 +167,14 @@ $(document).on('keyup', function(e){
 		refreshImage();
 		return false;
 	}
+	// F
+	if(keyHit == 70){
+		returnMessage("toggleFullScreen");
+		return false;
+	}
 	// Alt
 	if(keyHit == 18){
 		returnMessage("toggleMenuBarVis");
 		return false;
 	}
-});
+};

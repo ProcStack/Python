@@ -43,3 +43,5 @@ var logInMatch=0;
 var storeKeyHold=0;
 var rightClick=1;
 var rightDown=0;
+var imgBlockObj;//=document.getElementById("imgBlock");
+var menuBarLock=0;
